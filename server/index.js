@@ -1,14 +1,22 @@
 require("dotenv").config();
 const express = require("express"),
-      massive = require("massive"),
-      session = require("express-session"),
-      ctrl = require("./controllers/controller"),
-      auth = require("./controllers/authcontrollers"),
-    { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env,
-      port = SERVER_PORT,
-      app = express();
+  massive = require("massive"),
+  session = require("express-session"),
+  ctrl = require("./controllers/controller"),
+  auth = require("./controllers/authcontrollers"),
+  { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env,
+  port = SERVER_PORT,
+  app = express();
 
-      app.use(express.json());
+app.use(express.json());
+
+massive({
+  connectionString: CONNECTION_STRING,
+  ssl: { rejectUnauthorized: false },
+}).then((db) => {
+  app.set("db", db);
+  console.log("db connected");
+});
 
 app.use(
   session({
@@ -23,11 +31,12 @@ app.post("/api/register", auth.register);
 app.post("/api/login", auth.login);
 app.get("/api/logout", auth.logout);
 
+// // //post endpoints
+app.post("/api/post", ctrl.createPost);
+// app.get("/api/posts", auth.getUserPost);
+// app.delete("/api/post", ctrl.deletePost);
+// app.get("/api/posts", ctrl.getPost);
+// //user endpoints
+// // app.put("/api/user/:id", controller.updateUsername);
+
 app.listen(port, () => console.log(` on port ${port}`));
-massive({
-    connectionString: CONNECTION_STRING,
-    ssl: { rejectUnauthorized: false },
-  }).then((db) => {
-    app.set("db", db);
-    console.log("db connected");
-  });

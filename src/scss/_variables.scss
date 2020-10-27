@@ -3,7 +3,9 @@ $primary-body-color: rgb(235, 235, 235);
 $primary-text-color: rgb(0, 0, 0);
 $primary-input-color: rgb(240, 240, 240);
 
-$breakpoint-tablet: 768px;
+$break-small: 320px;
+$break-medium: 768px;
+$break-large: 901px;
 
 @mixin flex-container {
     display: flex;
@@ -27,10 +29,6 @@ $breakpoint-tablet: 768px;
     font-size: 16px;
     text-indent: 5px;
     
-    
-    
-    // background-color: #eee;
-    
 }
 
 @mixin auth-button{
@@ -40,7 +38,7 @@ $breakpoint-tablet: 768px;
 }
 
 @mixin auth-button-change{
-    background-color: #202020;
+    background-color: #0e684a;
     border: none;
     color: rgb(197, 194, 194);
 }

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 // import { connect } from 'react-redux';
 // import { loginUser } from '../../ducks/reducer';
-import '../Auth/Auth.scss'
-
+import '../../scss/Auth.scss';
+import backLogo from './logo.jpg'
 //METHODS
 //HANDLE CHANGE (2)
 //LOGIN
@@ -45,7 +45,7 @@ function Auth(props) {
             axios.post('/api/register', { email, password })
             .then((res) => {
                 // this.props.loginUser(res.data);
-                this.props.history.push('/dashboard');
+                this.props.history.push('/new');
             })
             .catch((err) => console.log(err));
     }
@@ -59,15 +59,16 @@ function Auth(props) {
         return (
             
                <div className='auth_body'>
+                   {/* <img className='auth_img' src={backLogo} alt='food-combination-.jpg' /> */}
                    <header className='header'>
                        {state.registerView
-                       ?<span onClick={handleToggle}>LOG IN</span>
+                       ?<span onClick={handleToggle}>Log In</span>
                        :<span onClick={handleToggle}>Create Account</span>
                        }
                    </header>
 
                    <section className='auth-box'>
-                {/* <img className='logo' src={logo} alt='Logo'/> */}
+                <img className='auth_img' src={backLogo} alt='logo.jpg'/> 
                 
                 {state.registerView
                 ? <h1 >Create Your Account</h1> 

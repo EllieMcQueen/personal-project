@@ -1,15 +1,25 @@
-@import '../../variables';
+@import './_variables.scss';
 
-.logo {
-    width: 40vmin;
-    pointer-events: none;
-} 
 .header{
     height: 50px;
     padding: 20px;
     @include flex-container;
     justify-content: flex-end;
 }
+.auth_img {
+    background-image: 'logo.jpg';
+    background-size: cover;
+    border: 2px solid goldenrod;
+    resize: both;
+    overflow: scroll;
+    background-size: 300px;
+  width: 300px;
+  height: 300px;
+  border: 2px solid;
+  text-shadow: white 0px 0px 2px;
+  font-size: 16px;
+} 
+
 .auth-box{
     // height: 600px;
     // width: 500px;
@@ -53,7 +63,10 @@
 }
 
 
-@media (min-width:$breakpoint-tablet){
+@media (min-width:$break-small){
+    .auth_img {
+        width: 55vw;
+    }
     .input {
         width: 55vw;
     }
