@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 
 module.exports = {   
+  // createProgress:
 
   createPost: (req, res) => {
       const { title, img, content } = req.body;

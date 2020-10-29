@@ -1,0 +1,89 @@
+$primary-box-color: rgb(255, 255, 255);
+$primary-body-color: rgb(235, 235, 235);
+$primary-text-color: rgb(0, 0, 0);
+$primary-input-color: rgb(240, 240, 240);
+$mobile-font-size: 10px;
+$tablet-font-size: 16px;
+$desktop-font-size: 22px;
+$primary-font-size: 14px;
+$primary-font-family: monospace;
+
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 901px;
+
+//Auth Mixin
+@mixin flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $primary-font-family;
+}
+
+@mixin flex-container-column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+    font-family: $primary-font-family ;
+    
+}
+@mixin auth-input{
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: solid;
+    border-width: .5px;
+    border-color: rgb(200, 200, 200);
+    font-size: 16px;
+    text-indent: 5px;
+    font-family: $primary-font-family;
+    // background-color: #eee;
+}
+@mixin auth-button{
+    background-color: #e7e7e7;
+    border: none;
+    color: rgb(197, 194, 194);
+    font-family: $primary-font-family;
+}
+@mixin auth-button-change{
+    background-color: #202020;
+    border: none;
+    color: rgb(197, 194, 194);
+    font-family: $primary-font-family oblique;
+}
+
+
+//Menu Mixin
+@mixin menu{
+    display:flex;
+    justify-content: center;
+    margin: 20px auto;
+    font-family: $primary-font-family;
+}
+
+//Header Mixin
+@mixin header{
+    font-family: $primary-font-family;
+    width:90px;
+    height: 100%;
+    display:flex;
+    align-items: center;
+
+}
+
+//NewEntry Mixin
+@mixin title-input{
+    border: none;
+    text-indent: 15px;
+    font-family: $primary-font-family;
+}
+@mixin new-entry-header{
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: solid;
+    border-width: .5px;
+    border-color: rgb(200, 200, 200);
+    font-family: $primary-font-family;
+}

@@ -4,11 +4,11 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 // import noImage from './no_image.jpg';
-
-// (how to calculate)
+import "../../scss/form.scss";
 
 const Form = () => {
   const [state, sState] = useState({
+    fName: "",
     age: "",
     gender: "",
     height: "",
@@ -17,13 +17,13 @@ const Form = () => {
   });
 
   const handleInput = (e) => {
-      sState({ ...state, [e.target.name]: e.target.value });
+    sState({ ...state, [e.target.name]: e.target.value });
   };
 
   const createPost = () => {
     const { age, gender, height, weight, activity} = state;
-    const weightKg = (weight / 2.205 * 10 ).toExponential(2);
-    const heightCm = (height * 12.0 * 2.54 * 6.25).toExponential(2);
+    const weightKg = weight / 2.205 * 10.0.toExponential(2);
+    const heightCm = height * 12.0 * 2.54 * 6.25.toExponential(2);
     const agediv = ( -5 * age )
     let tdee = 0
     let bmr = 0
@@ -58,28 +58,43 @@ const Form = () => {
       tdee = bmr * 1.9
     }
     
-   sState({tdee})
+   sState({...state, tdee: tdee.toFixed(2)})
     
-    console.log(tdee)
-    //update (using sState the tdee value in useState)
+    
+
+    console.log(tdee.toFixed(2))
 
     // send any of the above that's necessary to the back for storage
     // also, in .then, send necessary updates to redux
     // at this point, we should have age, gender, height, weight, activity (as well as the new tdee value)
-    // axios
-    //   .post("/api/post", { age, gender, height, weight, activity, tdee })
-    //   .then((res) => {
-    //     console.log('hit Form then function')
-    //   })
-    //   .catch((error) => console.log(error));
-  }
-
+    axios
+      .post("/api/post", { age, gender, height, weight, activity, tdee })
+      .then((res) => {
+        console.log("hit Form then function");
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="form">
-      <div className="content_box">
-        <h1 className="title">Create Profile</h1>
+      <div className="form-header">
+      
+        <div>
+        <div className="form_content_box">
         </div>
+
+          <h1 className="title">Create Profile</h1>
+        </div>
+        <div>
+          <input
+            onChange={(e) => handleInput(e)}
+            className="input"
+            value={state.fName}
+            name="fName"
+            placeholder="First Name"
+          />
+        </div>
+
         <div>
           <input
             onChange={(e) => handleInput(e)}
@@ -95,15 +110,12 @@ const Form = () => {
         {/* <div className="form_img_prev" style={{ backgroundImage: `url('${imgSrc}')`}} alt='preview'></div> */}
 
         <div>
-        
-        <select name="gender"onChange={handleInput}>
+        <select className="gender"onChange={handleInput}>
           <option value="title">Choose Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
           </select>
         </div>
-        
-        
 
         <div>
           <input
@@ -125,7 +137,7 @@ const Form = () => {
           />
         </div>
         <div>
-        <select name="activity" onChange={handleInput}>
+        <select className="activity" onChange={handleInput}>
         <option value="title">Choose Activity Level</option>
           <option value="sedentary">Sedentary</option>
           <option value="light">Light Activity</option>
@@ -133,22 +145,20 @@ const Form = () => {
           <option value="vActive">Very Active</option>
           <option value="eActive">Extra Active</option>
           <option value="sActive">Super Active</option>
-        </select>
+          </select>
         </div>
 
-        <Link to="/progress">
+        
+        <Link to="/Dashboard">
           <button onClick={createPost} className="form-submit-button">
             Submit
           </button>
         </Link>
       </div>
-    
+    </div>
   );
 };
 
 const mapStateToProps = (state) => state;
 
 export default connect(mapStateToProps)(Form);
-
-
- 

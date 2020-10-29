@@ -1,0 +1,110 @@
+@import "./_variables.scss";
+.form {
+  padding: 20px 20px 20px 100px;
+  text-align: center;
+  min-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: inherit;
+  //@include flex-container;
+  background-color: #f0f7f0;
+}
+.form-submit-button {
+  width: 20vw;
+  height: 40px;
+  margin: 10px;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #0b1141;
+  color: whitesmoke;
+}
+
+.form-header {
+  height: 450px;
+  width:800px;
+  margin: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color:  #1f95c4;
+  color: black;
+}
+.gender{
+  height: 40px;
+  width: 40vw;
+  color: #0b1141;
+  display: flex;
+}
+.activity{
+  height: 40px;
+  width: 40vw;
+  color: #0b1141;
+  display: flex; 
+}
+
+.input {
+  width: 20vw;
+  height: 40px;
+  @include auth-input;
+  background-color: white;
+}
+.input:focus {
+  background-color: $primary-input-color;
+  outline: none;
+  border-radius: 3px;
+  border: none;
+}
+::placeholder {
+  color: rgb(175, 175, 175);
+}
+
+@media (min-width: $break-small) {
+  .auth_img {
+    width: 55vw;
+  }
+  .input {
+    width: 55vw;
+  }
+  .button {
+    width: 55vw;
+  }
+  .button-change {
+    width: 55vw;
+  }
+  .dropDown {
+    width: 55vw;
+  }
+}
+
+// .auth_img {
+//     background-image: 'logo.jpg';
+//     background-size: cover;
+//     border: 2px solid goldenrod;
+//     resize: both;
+//     overflow: scroll;
+//     background-size: 300px;
+//   width: 300px;
+//   height: 300px;
+//   border: 2px solid;
+//   text-shadow: white 0px 0px 2px;
+//   font-size: 16px;
+// }
+
+// .auth-box{
+//     height: 600px;
+//     width: 500px;
+//     position: fixed;
+//     top: 50%;
+//     left: 50%;
+
+//     transform: translate(-50%, -50%);
+//     background-color: $primary-box-color;
+//     color: $primary-text-color;
+//     @include flex-container-column;
+//     background-color:  #8a5fc2;

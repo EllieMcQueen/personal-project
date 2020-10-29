@@ -4,7 +4,7 @@ import React from 'react';
 import Nav from './Components/Nav/Nav';
 import routes from './routes';
 import {withRouter} from 'react-router-dom';
-import './scss/App.scss';
+import './scss/Auth.scss';
 
 function App(props) {
   return (

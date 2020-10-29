@@ -1,11 +1,12 @@
 drop table if exists cust;
 drop table if exists tdee;
 drop table if exists progress;
+drop table if exists measurements;
 create table if not exists cust (
     id serial primary key,
-    name varchar(40),
+    email varchar(80),
     password text,
-    profile_picture text
+
 );
 
 create table if not exists tdee (
@@ -13,7 +14,18 @@ create table if not exists tdee (
     weight decimal,
     height decimal,
     age decimal,
-    lbm decimal,
+    bmi decimal,
+    tdee decimal,
+    cust_id int references cust(id)
+);
+
+create table if not exists measurements ( 
+    ra decimal,
+    la decimal,
+    hw decimal,
+    lw decimal,
+    rl decimal,
+    ll decimal,
     cust_id int references cust(id)
 );
 
@@ -22,12 +34,8 @@ create table if not exists progress (
     pic text,
     weight decimal,
     lbm decimal,
-    cust_id int references cust(id),
-    date varchar (20)
+    Date date,
+    cust_id int references cust(id)
+    
 );
 
-ALTER TABLE cust
-ADD username varchar (50);
-
-ALTER TABLE progress
-ALTER column date TYPE DATE NOT NULL DEFAULT CURRENT_DATE;

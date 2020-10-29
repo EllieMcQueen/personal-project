@@ -1,79 +1,91 @@
-@import './_variables.scss';
+@import "./_variables.scss";
 
-.header{
-    height: 50px;
-    padding: 20px;
-    @include flex-container;
-    justify-content: flex-end;
+// .header {
+//   font-family: $primary-font-family;
+//     width:90px;
+//     height: 100%;
+//     display:flex;
+//     justify-content: flex-end;
+//   height: 50px;
+//   padding: 20px;
+//   //@include flex-container;
+  
+  
+.auth_body{
+color: navy;
+display: flex;
+justify-content: flex-end;
+  
+
 }
 .auth_img {
-    background-image: 'logo.jpg';
-    background-size: cover;
-    border: 2px solid goldenrod;
-    resize: both;
-    overflow: scroll;
-    background-size: 300px;
-  width: 300px;
+  background-image: "logo.jpg";
+  background-size: cover;
+  border: 2px solid goldenrod;
+  resize: both;
+  overflow: scroll;
+  background-size: 300px;
+  width: 55vw;
+  min-width: 500px;
   height: 300px;
   border: 2px solid;
   text-shadow: white 0px 0px 2px;
   font-size: 16px;
-} 
-
-.auth-box{
-    // height: 600px;
-    // width: 500px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-    background-color: $primary-box-color;
-    color: $primary-text-color;
-    @include flex-container-column;
-    
 }
 
-.input{
-    width: 80vw;
-    height: 40px;
-    @include auth-input;
+.auth-box {
+  height: 600px;
+  width: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  background-color: $primary-box-color;
+  color: $primary-text-color;
+  @include flex-container-column;
 }
-.input:focus{
-    background-color: $primary-input-color;
-    outline: none;
-    border-radius: 3px;
-    border:none;
-    
+
+.input {
+  width: 80vw;
+  height: 40px;
+  @include auth-input;
+  color: blue;
 }
-::placeholder{
-    color: rgb(175, 175, 175);
+.input:focus {
+  background-color: $primary-input-color;
+  outline: none;
+  border-radius: 3px;
+  border: none;
 }
-.button{
-    width: 81.5vw;
-    height: 40px;
-    margin-top: 30px;
-    @include auth-button;
+::placeholder {
+  color: rgb(175, 175, 175);
 }
-.button-change{
-    width: 81.5vw;
-    height: 40px;
-    margin-top: 30px;
-    @include auth-button-change;
+.button {
+  width: 81.5vw;
+  height: 40px;
+  margin-top: 30px;
+  @include auth-button;
+}
+.button-change {
+  width: 81.5vw;
+  height: 40px;
+  margin-top: 30px;
+  @include auth-button-change;
 }
 
 
-@media (min-width:$break-small){
-    .auth_img {
-        width: 55vw;
-    }
-    .input {
-        width: 55vw;
-    }
-    .button {
-        width: 55vw;
-    }
-    .button-change {
-        width: 55vw;
-    }
+@media (min-width: $break-small) {
+  // .auth_img {
+  //   width: 55vw; min-width: 35px;
+  // }
+  .input {
+    width: 55vw;
+  }
+  .button {
+    width: 55vw;
+  }
+  .button-change {
+    width: 55vw;
+  }
 }

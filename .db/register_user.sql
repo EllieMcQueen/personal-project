@@ -1,4 +1,4 @@
-INSERT INTO cust(username, password, profile_picture)
-VALUES($1, $2, ,$3)
+INSERT INTO cust(email, password)
+VALUES($1, $2, )
 
-returning id, username, profile_picture;
+returning id, email;
