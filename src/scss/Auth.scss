@@ -12,27 +12,28 @@
   
   
 .auth_body{
-color: navy;
-display: flex;
-justify-content: flex-end;
-  
-
+  color: navy;
+  display: flex;
+  justify-content: flex-end;
+  $desktop-font-size: 22px;
+  height: 24px;
 }
-.auth_img {
-  background-image: "logo.jpg";
-  background-size: cover;
-  border: 2px solid goldenrod;
-  resize: both;
-  overflow: scroll;
-  background-size: 300px;
-  width: 55vw;
-  min-width: 500px;
-  height: 300px;
-  border: 2px solid;
-  text-shadow: white 0px 0px 2px;
-  font-size: 16px;
+section{
+  .auth_img {
+    background-image: "logo.jpg";
+    background-size: cover;
+    border: 2px solid goldenrod;
+    resize: both;
+    overflow: scroll;
+    background-size: 300px;
+    width: 55vw;
+    min-width: 500px;
+    height: 300px;
+    border: 2px solid;
+    text-shadow: white 0px 0px 2px;
+    font-size: 16px;
+  }
 }
-
 .auth-box {
   height: 600px;
   width: 500px;
@@ -89,3 +90,29 @@ justify-content: flex-end;
     width: 55vw;
   }
 }
+
+
+/*
+0 % { transform: scale(1); }
+25 % { transform: scale(.97); }
+35 % { transform: scale(.9); }
+45 % { transform: scale(1.1); }
+55 % { transform: scale(.9); }
+65 % { transform: scale(1.1); }
+75 % { transform: scale(1.03); }
+100 % { transform: scale(1); }
+`*/
+
+// const props = useSpring({x: state ? 1 : 0})
+// return (
+//   <animated.div
+//     style={{
+//       transform: props.x
+//         .interpolate({
+//           range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
+//           output: [1, 0.97, 0.9, 1.1, 0.9, 1.1, 1.03, 1]
+//         })
+//         .interpolate(x => `scale(${x})`)
+//     }}
+//   />
+// )

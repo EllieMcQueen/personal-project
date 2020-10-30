@@ -6,24 +6,31 @@ import { logoutUser } from '../../ducks/reducer'
 
 import homeLogo from './home.png'
 import newLogo from './form.png'
-import logoutLogo from './logout.png'
-import '../../scss/nav.scss';
+import logout from './logout.png'
+import fruit from './fruit.png'
+import prLogo from './prlogo.jpeg'
+import "../../scss/navv.scss"
+
+
 
 function Nav(props){
     if(props.location.pathname !== '/') {
         console.log('nav', props)
         return(  
-            <div className='nav_bar'>
-                 <div className='nav_profile_container'>
-                 <div className="nav_profile_pic" style={{ backgroundImage: `url('https://robohash.org/${props.username}')` }}></div>
+            <section className='nav_profile_container '>
+           
+               
+                 
                     <p>{props.username}</p>
-                </div>
+                
                 <div className='nav_links'>
                     <Link to='/dashboard'><img className='nav_img' src={homeLogo} alt='home' /></Link>
                     <Link to='/new'><img className='nav_img' src={newLogo} alt='new post' /></Link>
+                    <Link to='/progress'><img className='nav-img' src={prLogo} alt='progress' /></Link>
+                    <Link to='/' onClick={props.logout}><img className='nav_img' src={logout} alt='logout' /></Link>
                 </div>
-                <Link to='/' onClick={props.logout}><img className='nav_img logout' src={logoutLogo} alt='logout' /></Link>
-            </div>
+            
+            </section>
         )
     } else {
         return null
