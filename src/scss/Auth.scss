@@ -1,15 +1,15 @@
 @import "./_variables.scss";
 
-// .header {
-//   font-family: $primary-font-family;
-//     width:90px;
-//     height: 100%;
-//     display:flex;
-//     justify-content: flex-end;
-//   height: 50px;
-//   padding: 20px;
-//   //@include flex-container;
-  
+.header {
+  font-family: $primary-font-family;
+    width:90px;
+    height: 100%;
+    display:flex;
+    justify-content: flex-end;
+  height: 50px;
+  padding: 20px;
+  @include flex-container;
+}
   
 .auth_body{
   color: navy;
@@ -46,6 +46,7 @@ section{
   color: $primary-text-color;
   @include flex-container-column;
 }
+
 
 .input {
   width: 80vw;

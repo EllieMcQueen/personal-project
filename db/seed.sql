@@ -6,7 +6,6 @@ create table if not exists cust (
     id serial primary key,
     email varchar(80),
     password text,
-
 );
 
 create table if not exists tdee (
@@ -16,7 +15,9 @@ create table if not exists tdee (
     age decimal,
     bmi decimal,
     tdee decimal,
-    cust_id int references cust(id)
+    cust_id int references cust(id),
+    fname varchar(50),
+    gender varchar(6)
 );
 
 create table if not exists measurements ( 
@@ -36,6 +37,10 @@ create table if not exists progress (
     lbm decimal,
     Date date,
     cust_id int references cust(id)
-    
+    -- add activity level
 );
 
+-- alter table tdee
+-- add column fname varchar(50)
+--alter table tdee
+--add column gender varchar(6)

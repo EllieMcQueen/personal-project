@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const initialState = {
   email: "",
   id: 0,
@@ -27,7 +28,7 @@ export function logoutUser() {
 }
 
 export function getUser() {
-  const payload = axios.get("/api/auth/cust");
+  const payload = axios.get("/api/auth/user");
   return {
     type: GET_USER,
     payload: payload,

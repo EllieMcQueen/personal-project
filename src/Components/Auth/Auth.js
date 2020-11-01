@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { connect } from 'react-redux';
-import { loginUser } from '../../ducks/reducer';
+import { connect } from "react-redux";
+import { getUser } from "../../ducks/reducer";
 import "../../scss/Auth.scss";
+import { Link } from "react-router-dom";
 import backLogo from "./logo.jpg";
 //METHODS
 //HANDLE CHANGE (2)
@@ -14,7 +15,6 @@ function Auth(props) {
     email: "",
     password: "",
     verPassword: "",
-    profilePicture: "",
     registerView: false,
   });
 
@@ -26,26 +26,30 @@ function Auth(props) {
     sState({ ...state, registerView: !state.registerView });
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     const { email, password } = state;
 
     axios
       .post("/api/login", { email, password })
       .then((res) => {
-        props.getUser(res.data);
+        console.log(res);
+        //props.getUser(res.data);
+        console.log(props);
         props.history.push("/dashboard");
       })
       .catch((err) => console.log(err));
   };
 
-  const handleRegister = () => {
+  const handleRegister = (e) => {
+    e.preventDefault();
     const { email, password, verPassword } = state;
     if (password && password === verPassword) {
       axios
         .post("/api/register", { email, password })
         .then((res) => {
-          props.getUser(res.data);
-          this.props.history.push("/new");
+          //props.getUser(res.data);
+          props.history.push("/new");
         })
         .catch((err) => console.log(err));
     } else {
@@ -54,51 +58,41 @@ function Auth(props) {
   };
 
   return (
-    <div className="auth_body">
-      {/* <img className='auth_img' src={backLogo} alt='food-combination-.jpg' /> */}
-      <header className="header">
-        {state.registerView ? 
-          <span 
-          name='register'
-          onClick={handleToggle}>Log In</span>
-         : <span 
-          name='register'
-          onClick={handleToggle}>Create Account</span>
-        }
+    <div>
+      <header className="auth-header">
+        {state.registerView ? (
+          <span name="registerView" onClick={handleToggle}>
+            Log In
+          </span>
+        ) : (
+          <span name="registerView" onClick={handleToggle}>
+            Create Account
+          </span>
+        )}
       </header>
-
-      <section className="auth-box">
+      <form className="auth-box">
         <img className="auth_img" src={backLogo} alt="logo.jpg" />
 
         {state.registerView ? (
-          <h1>Create Your Account</h1>
-        ) : (
-          <h1>Log into your Tracker</h1>
-        )}
+          <div>
+            <h1>Create Your Account</h1>
+            <input
+              className="input"
+              value={state.email}
+              name="email"
+              placeholder="Email Address"
+              onChange={(e) => handleInput(e)}
+            />
 
-        <div>
-          <input
-            className="input"
-            value={state.email}
-            name="email"
-            placeholder="Email Address"
-            onChange={(e) => handleInput(e)}
-          />
-        </div>
+            <input
+              className="input"
+              type="password"
+              value={state.password}
+              name="password"
+              placeholder="Password"
+              onChange={(e) => handleInput(e)}
+            />
 
-        <div>
-          <input
-            className="input"
-            type="password"
-            value={state.password}
-            name="password"
-            placeholder="Password"
-            onChange={(e) => handleInput(e)}
-          />
-        </div>
-
-        {state.registerView ? (
-          <>
             <input
               className="input"
               type="password"
@@ -107,35 +101,52 @@ function Auth(props) {
               placeholder="Verify Password"
               onChange={(e) => handleInput(e)}
             />
+
             <button
               className={
                 state.email && state.password && state.verPassword
-                  ? "button-change"
-                  : "button"
+                  ? "auth-button change"
+                  : "auth-button"
               }
               onClick={handleRegister}
-            >
-              CREATE ACCOUNT
-            </button>
-          </>
+            >CREATE ACCOUNT</button>
+          </div>
         ) : (
           <div>
+            <h1>Log into your Tracker</h1>
+            <input
+              className="input"
+              value={state.email}
+              name="email"
+              placeholder="Email Address"
+              onChange={(e) => handleInput(e)}
+            />
+
+            <input
+              className="input"
+              type="password"
+              value={state.password}
+              name="password"
+              placeholder="Password"
+              onChange={(e) => handleInput(e)}
+            />
             <button
-              // {this.state.email && this.state.password
-              // ? className='button'
-              // : className='button'}
               className={
-                state.email && state.password ? "button-change" : "button"
+                state.email && state.password
+                  ? "auth-button change"
+                  : "auth-button"
               }
               onClick={handleLogin}
-            >
-              LOG IN
-            </button>
+            >Log In</button>
           </div>
         )}
-      </section>
+
+        <Link className="forgot-pw-link" to="/forgotpassword">
+          <span>CAN'T LOG IN?</span>
+        </Link>
+      </form>
     </div>
   );
 }
 
-export default Auth;
+export default connect(null, { getUser })(Auth);

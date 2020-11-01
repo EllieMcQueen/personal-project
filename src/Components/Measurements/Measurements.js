@@ -4,14 +4,16 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 // import noImage from './no_image.jpg';
-import "../../scss/form.scss";
+import "../../scss/measurements.scss";
 
-const Form = () => {
+const Measurements = () => {
   const [state, sState] = useState({
-    fname: "",
-    age: "",
-    gender: "",
-    height: "",
+    rightArm: "",
+    leftArm: "",
+    highWaist: "",
+    waist: "",
+    rightLeg: "",
+    leftLeg: "",
     weight: "",
     activity: 0,
   });
@@ -21,7 +23,7 @@ const Form = () => {
   };
 
   const createPost = () => {
-    const { age, gender, height, weight, activity, fname } = state;
+    const { age, gender, height, weight, activity } = state;
     const weightKg = (weight / 2.205) * (10.0).toExponential(2);
     const heightCm = height * 12.0 * 2.54 * (6.25).toExponential(2);
     const agediv = -5 * age;
@@ -59,7 +61,7 @@ const Form = () => {
     // also, in .then, send necessary updates to redux
     // at this point, we should have age, gender, height, weight, activity (as well as the new tdee value)
     axios
-      .post("/api/profile", { fname, age, gender, height, weight, activity, tdee })
+      .post("/api/post", { age, gender, height, weight, activity, tdee })
       .then((res) => {
         console.log("hit Form then function");
       })
@@ -67,18 +69,18 @@ const Form = () => {
   };
 
   return (
-    <div className="form">
+    <div className="measurements">
       <div className="form-header">
-        <h1 className="title">Create Profile</h1>
+        <h1 className="title">MEASUREMENTS</h1>
       </div>
-
+    
       <div>
         <input
           onChange={(e) => handleInput(e)}
           className="input"
-          value={state.fname}
-          name="fname"
-          placeholder="First Name"
+          value={state.rightArm}
+          name="rightArm"
+          placeholder="Right Arm"
         />
       </div>
 
@@ -86,15 +88,50 @@ const Form = () => {
         <input
           onChange={(e) => handleInput(e)}
           className="input"
-          value={state.age}
-          name="age"
-          placeholder="Age"
+          value={state.leftArm}
+          name="leftArm"
+          placeholder="left Arm"
         />
       </div>
 
-      {/* <img className="form_img_prev" src={this.state.img} alt="Not Found"/> */}
+      <div>
+        <input
+          onChange={(e) => handleInput(e)}
+          className="input"
+          value={state.highWaist}
+          name="highWaist"
+          placeholder="High Waist"
+        />
+      </div>
 
-      {/* <div className="form_img_prev" style={{ backgroundImage: `url('${imgSrc}')`}} alt='preview'></div> */}
+      <div>
+        <input
+          onChange={(e) => handleInput(e)}
+          className="input"
+          value={state.waist}
+          name="waist"
+          placeholder="Waist"
+        />
+      </div>
+      <div>
+        <input
+          onChange={(e) => handleInput(e)}
+          className="input"
+          value={state.rightleg}
+          name="rightleg"
+          placeholder="Right Leg"
+        />
+      </div>
+
+      <div>
+        <input
+          onChange={(e) => handleInput(e)}
+          className="input"
+          value={state.leftleg}
+          name="leftleg"
+          placeholder="left Leg"
+        />
+      </div>
 
       <div>
         <input
@@ -115,15 +152,8 @@ const Form = () => {
           placeholder="Weight"
         />
       </div>
-      <div>
-        <select className="gender" onChange={handleInput} name='gender'>
-          <option value="title">Choose Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </div>
-      <div>
-        <select className="activity" onChange={handleInput} name ='activity'>
+      <>
+        <select className="activity" onChange={handleInput}>
           <option value="title">Choose Activity Level</option>
           <option value="sedentary">Sedentary</option>
           <option value="light">Light Activity</option>
@@ -132,9 +162,9 @@ const Form = () => {
           <option value="eActive">Extra Active</option>
           <option value="sActive">Super Active</option>
         </select>
-      </div>
+      </>
 
-      <Link to="/measure">
+      <Link to="/progress">
         <button onClick={createPost} className="form-submit-button">
           Submit
         </button>
@@ -145,4 +175,4 @@ const Form = () => {
 
 const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps)(Form);
+export default connect(mapStateToProps)(Measurements);

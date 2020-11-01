@@ -25,7 +25,7 @@ function Nav(props){
                 
                 <div className='nav_links'>
                     <Link to='/dashboard'><img className='nav_img' src={homeLogo} alt='home' /></Link>
-                    <Link to='/new'><img className='nav_img' src={newLogo} alt='new post' /></Link>
+                    <Link to='/measure'><img className='nav_img' src={newLogo} alt='new post' /></Link>
                     <Link to='/progress'><img className='nav-img' src={prLogo} alt='progress' /></Link>
                     <Link to='/' onClick={props.logout}><img className='nav_img' src={logout} alt='logout' /></Link>
                 </div>
