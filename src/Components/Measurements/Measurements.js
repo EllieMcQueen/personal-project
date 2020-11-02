@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // import noImage from './no_image.jpg';
 import "../../scss/measurements.scss";
 
-const Measurements = () => {
+function Measurements(props)  {
   const [state, sState] = useState({
     rightArm: "",
     leftArm: "",
@@ -23,7 +23,8 @@ const Measurements = () => {
   };
 
   const createPost = () => {
-    const { age, gender, height, weight, activity } = state;
+    const {age, gender, height } = props.initialinfo
+    const { weight, activity } = state;
     const weightKg = (weight / 2.205) * (10.0).toExponential(2);
     const heightCm = height * 12.0 * 2.54 * (6.25).toExponential(2);
     const agediv = -5 * age;
@@ -32,7 +33,7 @@ const Measurements = () => {
     console.log(age, height, weight, gender, activity);
     console.log(weightKg, heightCm);
     console.log(agediv);
-
+    
     if (gender === "Male") {
       bmr = weightKg + heightCm + agediv + 5;
     } else {
@@ -61,7 +62,7 @@ const Measurements = () => {
     // also, in .then, send necessary updates to redux
     // at this point, we should have age, gender, height, weight, activity (as well as the new tdee value)
     axios
-      .post("/api/post", { age, gender, height, weight, activity, tdee })
+      .post("/api/profile", { age, gender, height, weight, activity, tdee })
       .then((res) => {
         console.log("hit Form then function");
       })
@@ -137,23 +138,13 @@ const Measurements = () => {
         <input
           onChange={(e) => handleInput(e)}
           className="input"
-          value={state.height}
-          name="height"
-          placeholder="Height"
-        />
-      </div>
-
-      <div>
-        <input
-          onChange={(e) => handleInput(e)}
-          className="input"
           value={state.weight}
           name="weight"
           placeholder="Weight"
         />
       </div>
-      <>
-        <select className="activity" onChange={handleInput}>
+      <div>
+        <select className="activity" onChange={handleInput} name = 'activity '>
           <option value="title">Choose Activity Level</option>
           <option value="sedentary">Sedentary</option>
           <option value="light">Light Activity</option>
@@ -162,9 +153,10 @@ const Measurements = () => {
           <option value="eActive">Extra Active</option>
           <option value="sActive">Super Active</option>
         </select>
-      </>
+        </div>
+      
 
-      <Link to="/progress">
+      <Link to="/dashboard">
         <button onClick={createPost} className="form-submit-button">
           Submit
         </button>
@@ -173,6 +165,5 @@ const Measurements = () => {
   );
 };
 
-const mapStateToProps = (state) => state;
-
+const mapStateToProps = (reduxState) => reduxState;
 export default connect(mapStateToProps)(Measurements);

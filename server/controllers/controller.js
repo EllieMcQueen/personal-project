@@ -2,9 +2,10 @@ const bcrypt = require("bcryptjs");
 
 module.exports = {   
 
-  createProgress: (req, res) => {
+  createProgress: async (req, res) => {
+    console.log(req.body)
       const { pic, weight, lbm, date } = req.body;
-      const { id } = req.session.user; 
+      const { id } = req.session.cust; 
       const db = req.app.get('db');
       db.create_progress( pic, weight, lbm, date, id).then( () => res.sendStatus(200));
   },
@@ -27,6 +28,11 @@ module.exports = {
     return res.status(200).send([tdee])
   },
 
+  getMacros: async (req, res) => {
+    const db = req.app.get('db')
+    const [macros] = await db.get_macros();
+    return res.status(200).send([macros])
+  }
   // deletePost: async (req, res) => {
   //   const db = req.app.get('db)');
   //   const {id} = req.params;

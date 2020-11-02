@@ -1,26 +1,71 @@
-box-1 {
-    width: 50px;
+@import "./_variables.scss";
+.form {
+  padding: 20px 20px 20px 100px;
+  text-align: center;
+  min-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: inherit;
+  //@include flex-container;
+  background-color: #f0f7f0;
+}
+
+  .form-header {
     height: 50px;
-    background: red;
-    border: 1px solid black;
-  }
-  
-  /* @mixin flex-parent {
+    width:800px;
+    padding-top: 30px ;
+    padding-left: 30px;
+   
     display: flex;
-    flex-wrap: wrap;
-  } */
-  
-  .box-container {
-    width: 125px;
-    border: 1px solid purple;
-    /* display: flex;
-    flex-wrap: wrap; */
-    /* @include flex-parent; */
-    justify-content: space-between;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    
+    color: black;
+  }
+  .intake{
+    height: 40px;
+    width: 40vw;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    @include auth-input
+  }
+  .form-submit-button {
+    width: 40vw;
+    height: 40px;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    @include auth-input;
+    background-color: #0b1141;
+    color: whitesmoke;
   }
   
-  @media only screen and (max-width: 500px) {
-    .box-container {
-      flex-direction: column;
+  @media (min-width: $break-small) {
+    .auth_img {
+      width: 55vw;
+    }
+    .input {
+      width: 55vw;
+    }
+    .button {
+      width: 55vw;
+    }
+    .button-change {
+      width: 55vw;
+    }
+    .dropDown {
+      width: 55vw;
     }
   }
+  

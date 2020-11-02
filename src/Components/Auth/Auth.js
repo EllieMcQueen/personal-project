@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { getUser } from "../../ducks/reducer";
+import { getUser, loginUser } from "../../ducks/reducer";
 import "../../scss/Auth.scss";
 import { Link } from "react-router-dom";
 import backLogo from "./logo.jpg";
+
 //METHODS
 //HANDLE CHANGE (2)
 //LOGIN
@@ -36,7 +37,9 @@ function Auth(props) {
         console.log(res);
         //props.getUser(res.data);
         console.log(props);
-        props.history.push("/dashboard");
+        const { email, id, age, gender, height, weight}= res.data;
+        props.loginUser(email, id, age, gender, height, weight)
+        props.history.push("/measure");
       })
       .catch((err) => console.log(err));
   };
@@ -149,4 +152,4 @@ function Auth(props) {
   );
 }
 
-export default connect(null, { getUser })(Auth);
+export default connect(null, { getUser, loginUser })(Auth);

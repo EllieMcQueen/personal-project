@@ -134,7 +134,7 @@ const Form = () => {
         </select>
       </div>
 
-      <Link to="/measure">
+      <Link to="/dashboard">
         <button onClick={createPost} className="form-submit-button">
           Submit
         </button>

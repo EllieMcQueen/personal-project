@@ -37,6 +37,8 @@ app.get("api/tdee", ctrl.getTdee);
 app.post("/api/post", ctrl.createProgress);
 app.get("/api/auth", auth.getUser);
 app.post('/api/profile', auth.createProfile);
+//app.post('/api/macros', ctrl.getMacros);
+
 // app.delete("/api/post", ctrl.deletePost);
 // app.get("/api/posts", ctrl.getPost);
 // //user endpoints
