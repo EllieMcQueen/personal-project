@@ -37,10 +37,27 @@ create table if not exists progress (
     lbm decimal,
     Date date,
     cust_id int references cust(id)
-    -- add activity level
+    activity decimal
 );
+create table if not exists macros (
+    id serial primary key,
+    calories decimal,
+    fats decimal,
+    carbs decimal,
+    protein decimal,
+    cust_id int references cust(id)
+    );
 
 -- alter table tdee
 -- add column fname varchar(50)
 --alter table tdee
 --add column gender varchar(6)
+--alter table measurements
+--add column weight decimal
+--alter table progress
+--add column activity decimal
+-- inner join tdee on cust.id = tdee.cust_id;
+--select * from cust
+--inner join measurements on cust.id = measurements.cust_id;
+--inner join progress on cust.id = progress.cust_id;
+--inner join macros on cust.id = macros.cust_id;
