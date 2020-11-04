@@ -49,8 +49,9 @@ app.post('/api/profile', auth.createProfile);
 // app.get("/api/posts", ctrl.getPost);
 // //user endpoints
 // // app.put("/api/user/:id", controller.updateUsername);
-app.use(express.static(__dirname+'/../build'))
-app.get('*',(req,res) => {
+// app.use(express.static(__dirname+'/../build'))
+app.use(express.static(`${__dirname}/../build`));
+app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname,'../build/index.html'))
 })
 app.listen(port, () => console.log(` on port ${port}`));
