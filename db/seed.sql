@@ -17,7 +17,8 @@ create table if not exists tdee (
     tdee decimal,
     cust_id int references cust(id),
     fname varchar(50),
-    gender varchar(6)
+    gender varchar(6),
+    activity text,
 );
 
 create table if not exists measurements ( 

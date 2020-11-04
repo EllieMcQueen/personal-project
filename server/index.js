@@ -1,5 +1,6 @@
 require("dotenv").config();
-const express = require("express"),
+const path = require('path'),
+      express = require("express"),
       massive = require("massive"),
       session = require("express-session"),
       ctrl = require("./controllers/controller"),
@@ -30,18 +31,26 @@ app.use(
 app.post("/api/register", auth.register);
 app.post("/api/login", auth.login);
 app.get("/api/logout", auth.logout);
-app.get("api/measure", ctrl.getMeasurements);
+app.post("/api/measure", ctrl.updateMeasurements);
+app.post('/api/macros', ctrl.updateMacros);
 // // //post endpoints
 app.get("api/progress", ctrl.getProgress);
 app.get("api/tdee", ctrl.getTdee);
+app.get('/api/getInfo', ctrl.getInfo)
+// app.get('api/getMeasurements', ctrl.getMeasurements)
+app.get('/api/getCustInfo', ctrl.getCustInfo)
 app.post("/api/post", ctrl.createProgress);
 app.get("/api/auth", auth.getUser);
 app.post('/api/profile', auth.createProfile);
-//app.post('/api/macros', ctrl.getMacros);
+//app.post('/api/macros', ctrl.createMacros);
 
+//app.get('/api/getnewmacros', ctrl.getNewMacros);
 // app.delete("/api/post", ctrl.deletePost);
 // app.get("/api/posts", ctrl.getPost);
 // //user endpoints
 // // app.put("/api/user/:id", controller.updateUsername);
-
+app.use(express.static(__dirname+'/../build'))
+app.get('*',(req,res) => {
+  res.sendFile(path.join(__dirname,'../build/index.html'))
+})
 app.listen(port, () => console.log(` on port ${port}`));

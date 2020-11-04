@@ -58,10 +58,10 @@ module.exports = {
   },
   createProfile: async (req, res) => {
     const db = req.app.get("db");
-    const { age, fname, weight, height, gender } = req.body;
+    const { fname, age, gender, height, weight, activity, tdee} = req.body;
     const { id } = req.session.cust;
     console.log(req.body, id);
-    await db.create_profile([age, fname, weight, height, gender, id]);
+    await db.create_profile(fname, age, gender, height, weight, activity, tdee, id);
     res.sendStatus(200);
   },
   //   getUserPost: async (req, res) => {

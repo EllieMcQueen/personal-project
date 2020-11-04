@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 // import noImage from './no_image.jpg';
 import "../../scss/form.scss";
+import { setTdee } from '../../ducks/reducer';
 
-const Form = () => {
+const Form = (props) => {
   const [state, sState] = useState({
     fname: "",
     age: "",
@@ -17,6 +18,7 @@ const Form = () => {
   });
 
   const handleInput = (e) => {
+    console.log(e.target.name, e.target.value)
     sState({ ...state, [e.target.name]: e.target.value });
   };
 
@@ -52,14 +54,14 @@ const Form = () => {
     }
 
     sState({ ...state, tdee: tdee.toFixed(2) });
-//store tdee in redux
+       props.setTdee(tdee.toFixed(2), weight, activity); 
     console.log(tdee.toFixed(2));
 
     // send any of the above that's necessary to the back for storage
     // also, in .then, send necessary updates to redux
     // at this point, we should have age, gender, height, weight, activity (as well as the new tdee value)
     axios
-      .post("/api/profile", { fname, age, gender, height, weight, activity, tdee })
+      .post("/api/profile", { fname, age, gender, height, weight, activity, tdee})
       .then((res) => {
         console.log("hit Form then function");
       })
@@ -92,9 +94,7 @@ const Form = () => {
         />
       </div>
 
-      {/* <img className="form_img_prev" src={this.state.img} alt="Not Found"/> */}
-
-      {/* <div className="form_img_prev" style={{ backgroundImage: `url('${imgSrc}')`}} alt='preview'></div> */}
+      
 
       <div>
         <input
@@ -145,4 +145,4 @@ const Form = () => {
 
 const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps)(Form);
+export default connect(mapStateToProps, {setTdee})(Form);

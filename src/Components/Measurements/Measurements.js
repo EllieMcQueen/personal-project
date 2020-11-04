@@ -1,30 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import store from '../../ducks/store';
 import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 // import noImage from './no_image.jpg';
 import "../../scss/measurements.scss";
+import { setTdee } from '../../ducks/reducer';
+//USING THE FUNCTION WE MADE IN THE REDUCER FILE:
+  //STEP 1 - IMPORT IT
+  //STEP 2 - CONNECT IT
+    //PLACES CONNECTED COPYON PROPS
+  //STEP 3 - USE IT WHEREVER WE NEED TO (MAKE SURE TO REFERENCE FROM PROPS);
 
-function Measurements(props)  {
+const Measurements = (props) => {
   const [state, sState] = useState({
     rightArm: "",
     leftArm: "",
     highWaist: "",
     waist: "",
-    rightLeg: "",
-    leftLeg: "",
+    rightleg: "",
+    leftleg: "",
     weight: "",
-    activity: 0,
+    height: 0,
+    age: 0,
+    gender: '',
+    activity: '',
+    date: new Date()
   });
 
+  useEffect(() => {
+    axios.get('/api/getCustInfo')
+    .then(res => sState({...state, height: res.data.height, age: res.data.age, gender: res.data.gender }))
+    .catch(err=> console.log(err))
+  },[])
+
+
   const handleInput = (e) => {
+    console.log(e.target.name, e.target.value)
     sState({ ...state, [e.target.name]: e.target.value });
   };
+  const handleActivityInput = (activity) => {
+    sState({...state, activity: activity.target.value})
+  }
+
 
   const createPost = () => {
-    const {age, gender, height } = props.initialinfo
-    const { weight, activity } = state;
+    const {age, gender, height, weight, activity, rightArm, leftArm, highWaist, waist, rightleg, leftleg, date} = state;
     const weightKg = (weight / 2.205) * (10.0).toExponential(2);
     const heightCm = height * 12.0 * 2.54 * (6.25).toExponential(2);
     const agediv = -5 * age;
@@ -55,14 +76,16 @@ function Measurements(props)  {
     }
 
     sState({ ...state, tdee: tdee.toFixed(2) });
-//store tdee in redux
+    props.setTdee(tdee.toFixed(2), weight, activity);
+    
     console.log(tdee.toFixed(2));
 
     // send any of the above that's necessary to the back for storage
     // also, in .then, send necessary updates to redux
     // at this point, we should have age, gender, height, weight, activity (as well as the new tdee value)
+    
     axios
-      .post("/api/profile", { age, gender, height, weight, activity, tdee })
+      .post("/api/measure", { rightArm, leftArm, highWaist, waist, rightleg, leftleg, weight, date})
       .then((res) => {
         console.log("hit Form then function");
       })
@@ -144,7 +167,7 @@ function Measurements(props)  {
         />
       </div>
       <div>
-        <select className="activity" onChange={handleInput} name = 'activity '>
+        <select className="activity" onChange={handleActivityInput} name ='activity'>
           <option value="title">Choose Activity Level</option>
           <option value="sedentary">Sedentary</option>
           <option value="light">Light Activity</option>
@@ -156,7 +179,7 @@ function Measurements(props)  {
         </div>
       
 
-      <Link to="/dashboard">
+      <Link to="/logindashboard">
         <button onClick={createPost} className="form-submit-button">
           Submit
         </button>
@@ -166,4 +189,4 @@ function Measurements(props)  {
 };
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps)(Measurements);
+export default connect(mapStateToProps, {setTdee})(Measurements);

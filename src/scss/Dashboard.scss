@@ -50,6 +50,59 @@
     background-color: #0b1141;
     color: whitesmoke;
   }
+  .dashboard-header{
+    width: 100%;
+    height: 6%;
+    display:flex;
+    justify-content: center;
+    border-bottom: 1px solid black;
+
+    padding-bottom: 1%;
+  }
+  .calories{
+    height: 40px;
+    width: 40vw;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color: whitesmoke;
+    color: navy;
+   }
+   .fats{
+    height: 40px;
+    width: 40vw;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color: whitesmoke;
+    color: navy;
+   }
+   .protein{
+    height: 40px;
+    width: 40vw;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color: whitesmoke;
+    color: navy;
+   }
+   .carbs{
+    height: 40px;
+    width: 40vw;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color: whitesmoke;
+    color: navy;
+   }
   
   @media (min-width: $break-small) {
     .auth_img {

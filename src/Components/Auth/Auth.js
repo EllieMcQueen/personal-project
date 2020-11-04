@@ -37,8 +37,8 @@ function Auth(props) {
         console.log(res);
         //props.getUser(res.data);
         console.log(props);
-        const { email, id, age, gender, height, weight}= res.data;
-        props.loginUser(email, id, age, gender, height, weight)
+        const { email, cust_id, age, gender, height, weight}= res.data;
+        props.loginUser(email, cust_id, age, gender, height, weight)
         props.history.push("/measure");
       })
       .catch((err) => console.log(err));

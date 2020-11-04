@@ -6,7 +6,7 @@ import mreducer from './mreducer'
 
 
 const rootReducer = combineReducers({
-  measurments: mreducer, 
+  measurements: mreducer, 
   initialinfo: reducer
 })
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware));

@@ -7,9 +7,9 @@ import { getProgress } from "../../ducks/mreducer";
 
 function Progress(props) {
   const [state, sState] = useState({
-    searchPost: "",
-    editPost: "",
-    deletePost: "",
+    fname: "",
+    editProgress: "",
+    deleteProgress: "",
   });
 
   const getProgress = () => {
@@ -25,7 +25,7 @@ function Progress(props) {
     <div className="progress2">
       <header className="dash-header">
         <div className="dash-header-cont">
-          {/* <span className='Progress'>{props.mreducer.user.fname}Progress</span> */}
+          <span className='Progress'>{state.measurements}</span>
         </div>
 
         <div className="search-flex">

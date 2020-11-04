@@ -6,11 +6,13 @@ import Form from './Components/Form/Form';
 import Progress from './Components/Progress/Progress';
 import ForgotPassword from './Components/ForgotPassword/ForgotPassword'
 import Measurements from './Components/Measurements/Measurements'
+import Logindashboard from './Components/Dashboard/Logindashboard'
 
 export default (
     <Switch>
         <Route exact path='/' component={Auth} />
         <Route path='/dashboard' component={Dashboard} />
+        <Route path='/logindashboard' component={Logindashboard} />
         <Route path='/progress' component={Progress} />
         <Route path='/new' component={Form} />
         <Route path='/forgotpassword' component={ForgotPassword}/>
