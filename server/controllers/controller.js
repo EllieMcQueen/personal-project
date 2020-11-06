@@ -22,6 +22,17 @@ module.exports = {
     return res.status(200).send([progress])
   },
 
+  updateAge: async (req, res) => {
+    const db = req.app.get('db');
+    const [age] = await db.update_age();
+    return res.status(200).send([age])
+  },
+  deleteAge: async (req, res) => {
+    const db = req.app.get('db')
+    const [age] = await db.delete_age();
+    return res.status(200).send([age])
+  },
+
   getTdee: async (req, res) => {
     const db = req.app.get('db');
     const [tdee] = await db.get_tdee();

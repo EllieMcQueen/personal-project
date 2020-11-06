@@ -39,7 +39,6 @@ const createMacros = () => {
 
 if (intake === 'cutting') {
     calories = tdee * 0.8;
-    console.log (calories)
     protein = weight  * 4
     fats = weight * 0.25 * 9;
     two = (calories - fats) - protein;

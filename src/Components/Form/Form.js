@@ -10,10 +10,10 @@ import { setTdee } from '../../ducks/reducer';
 const Form = (props) => {
   const [state, sState] = useState({
     fname: "",
-    age: "",
+    age: 0,
     gender: "",
-    height: "",
-    weight: "",
+    height: 0,
+    weight: 0,
     activity: 0,
   });
 
@@ -91,6 +91,7 @@ const Form = (props) => {
           value={state.age}
           name="age"
           placeholder="Age"
+          type="number"
         />
       </div>
 
@@ -103,6 +104,7 @@ const Form = (props) => {
           value={state.height}
           name="height"
           placeholder="Height"
+          type="number"
         />
       </div>
 
@@ -113,6 +115,7 @@ const Form = (props) => {
           value={state.weight}
           name="weight"
           placeholder="Weight"
+          type="number"
         />
       </div>
       <div>

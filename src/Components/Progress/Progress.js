@@ -10,6 +10,8 @@ function Progress(props) {
     fname: "",
     editProgress: "",
     deleteProgress: "",
+    age: 0,
+    updateAge: false
   });
 
   const getProgress = () => {
@@ -21,6 +23,41 @@ function Progress(props) {
   };
   console.log(props);
   
+  const handleAge = () => {
+    if(state.updateAge) {
+      axios
+      .put(`/api/progress`)
+      .then((res) => { 
+      sState({ ...state, age: res.data, updateAge: false})
+      })
+      .catch((err) => console.log(err));
+    } else {
+      sState({ ...state, updateAge: true})
+    }
+  }
+
+  const deleteAge = () => {
+      axios
+      .delete(`/api/progress`)
+      .then((res) => { 
+      sState({ ...state, age: 0})
+      })
+      .catch((err) => console.log(err));
+  }
+
+  const handleChange = (e) => {
+      console.log(e.target.name, e.target.value)
+      sState({ ...state, [e.target.name]: e.target.value });  
+  }
+
+  const ageInput = () => {
+    if(state.updateAge) {
+      return <input name="age" value={state.age} onChange={handleChange} ></input>
+    } else {
+      return <input name="age" value={state.age} onChange={handleChange} disabled></input>
+    }
+  }
+
   return (
     <div className="progress2">
       <header className="dash-header">
@@ -46,7 +83,12 @@ function Progress(props) {
         <div className="table-header">
           <span className="progress-date">Date Created</span>
         </div>
-        {/* {mappedProgress} */}
+        <div>
+          <span>Age:</span>
+            {ageInput()}
+          <button onClick={handleAge}>Update Age</button>
+          <button onClick={deleteAge}>Delete Age</button>
+        </div>
       </div>
     </div>
   );

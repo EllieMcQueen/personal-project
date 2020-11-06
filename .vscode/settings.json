@@ -7,11 +7,14 @@
         "chartjs",
         "cust",
         "devtools",
+        "forgotpassword",
         "initialinfo",
+        "leftleg",
         "logindashboard",
         "measurments",
         "mreducer",
         "popperjs",
-        "resave"
+        "resave",
+        "rightleg"
     ]
 }

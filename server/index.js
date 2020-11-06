@@ -33,6 +33,8 @@ app.post("/api/login", auth.login);
 app.get("/api/logout", auth.logout);
 app.post("/api/measure", ctrl.updateMeasurements);
 app.post('/api/macros', ctrl.updateMacros);
+app.put('/api/progress', ctrl.updateAge);
+app.delete("/api/progress", ctrl.deleteAge);
 // // //post endpoints
 app.get("api/progress", ctrl.getProgress);
 app.get("api/tdee", ctrl.getTdee);
