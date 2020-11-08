@@ -16,9 +16,8 @@ const handleInput = (e) => {
 };
 
 const createMacros = () => {
-  console.log (props)
   const {weight, tdee } = props.initialinfo
- var { intake } = state;
+  var { intake } = state;
   let calories 
   let two
   let three 

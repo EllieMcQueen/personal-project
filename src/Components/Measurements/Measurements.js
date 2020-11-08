@@ -31,7 +31,7 @@ const Measurements = (props) => {
   useEffect(() => {
     axios.get('/api/getCustInfo')
     .then(res => sState({...state, height: res.data.height, age: res.data.age, gender: res.data.gender }))
-    .catch(err=> console.log(err))
+    .catch(err => console.log(err))
   },[])
 
 
@@ -87,6 +87,7 @@ const Measurements = (props) => {
     axios
       .post("/api/measure", { rightArm, leftArm, highWaist, waist, rightleg, leftleg, weight, date})
       .then((res) => {
+        props.history.push('/dashboard')
         console.log("hit Form then function");
       })
       .catch((error) => console.log(error));
@@ -179,11 +180,11 @@ const Measurements = (props) => {
         </div>
       
 
-      <Link to="/logindashboard">
+      
         <button onClick={createPost} className="form-submit-button">
           Submit
         </button>
-      </Link>
+     
     </div>
   );
 };

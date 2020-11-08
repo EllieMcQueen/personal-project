@@ -20,7 +20,7 @@ function Dashboard(props) {
     axios.get('/api/getInfo')
     .then(res => sState({...state, tdee: res.data.tdee, weight: res.data.weight}))
     .catch(err=> console.log(err))
-  },[])
+  }, [])
 
 const handleInput = (e) => {
   sState({...state, [e.target.name]: e.target.value});

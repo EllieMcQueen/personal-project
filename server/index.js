@@ -36,8 +36,8 @@ app.post('/api/macros', ctrl.updateMacros);
 app.put('/api/progress', ctrl.updateAge);
 app.delete("/api/progress", ctrl.deleteAge);
 // // //post endpoints
-app.get("api/progress", ctrl.getProgress);
-app.get("api/tdee", ctrl.getTdee);
+app.get("/api/progress", ctrl.getProgress);
+app.get("/api/tdee", ctrl.getTdee);
 app.get('/api/getInfo', ctrl.getInfo)
 // app.get('api/getMeasurements', ctrl.getMeasurements)
 app.get('/api/getCustInfo', ctrl.getCustInfo)

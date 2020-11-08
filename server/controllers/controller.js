@@ -18,8 +18,9 @@ module.exports = {
 
   getProgress: async (req, res) => {
     const db = req.app.get('db');
-    const [progress] = await db.get_progress();
-    return res.status(200).send([progress])
+    const { id } = req.session.cust;
+    const progress = await db.get_posts([id]);
+    return res.status(200).send(progress)
   },
 
   updateAge: async (req, res) => {
@@ -44,7 +45,7 @@ module.exports = {
     const db = req.app.get('db')
     const { calories, carbs, fats, protein } = req.body
     const { id } = req.session.cust;
-    await db.create_macros( calories, carbs, fats, protein, id)
+    await db.create_macros( [calories, carbs, fats, protein, id])
   },
   getInfo: async (req, res) => {
     const db = req.app.get('db');
@@ -66,14 +67,17 @@ module.exports = {
     const {cust_id} = req.session.cust;
     const {rightArm, leftArm, highWaist, waist, rightleg, leftleg, weight, date} = req.body;
     const info = await db.update_measurements(rightArm, leftArm, highWaist, waist, rightleg, leftleg, weight, date, cust_id)
-    console.log(info)
+    console.log(info[0].id)
+    req.session.measurementId = info [0].id
     res.status(200).send(info[0])
   },
   updateMacros: async (req,res) => {
     const db = req.app.get('db')
     const {cust_id} = req.session.cust;
+    const {measurementId} = req.session;
+    console.log(measurementId);
     const { calories, fats, protein, carbs} = req.body;
-    const info = await db.update_macros( calories, fats, protein, carbs, cust_id)
+    const info = await db.update_macros( calories, fats, protein, carbs, cust_id, measurementId)
     console.log(info)
     res.status(200).send(info[0])
   }

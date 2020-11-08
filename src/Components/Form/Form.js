@@ -10,11 +10,11 @@ import { setTdee } from '../../ducks/reducer';
 const Form = (props) => {
   const [state, sState] = useState({
     fname: "",
-    age: 0,
+    age: '',
     gender: "",
-    height: 0,
-    weight: 0,
-    activity: 0,
+    height: '',
+    weight: '',
+    activity: '',
   });
 
   const handleInput = (e) => {
@@ -54,7 +54,7 @@ const Form = (props) => {
     }
 
     sState({ ...state, tdee: tdee.toFixed(2) });
-       props.setTdee(tdee.toFixed(2), weight, activity); 
+    props.setTdee(tdee.toFixed(2), weight, activity); 
     console.log(tdee.toFixed(2));
 
     // send any of the above that's necessary to the back for storage
@@ -63,7 +63,7 @@ const Form = (props) => {
     axios
       .post("/api/profile", { fname, age, gender, height, weight, activity, tdee})
       .then((res) => {
-        console.log("hit Form then function");
+        props.history.push('/dashboard')
       })
       .catch((error) => console.log(error));
   };
@@ -91,7 +91,7 @@ const Form = (props) => {
           value={state.age}
           name="age"
           placeholder="Age"
-          type="number"
+          
         />
       </div>
 
@@ -104,7 +104,7 @@ const Form = (props) => {
           value={state.height}
           name="height"
           placeholder="Height"
-          type="number"
+          
         />
       </div>
 
@@ -115,7 +115,7 @@ const Form = (props) => {
           value={state.weight}
           name="weight"
           placeholder="Weight"
-          type="number"
+          
         />
       </div>
       <div>
@@ -137,11 +137,11 @@ const Form = (props) => {
         </select>
       </div>
 
-      <Link to="/dashboard">
+      
         <button onClick={createPost} className="form-submit-button">
           Submit
         </button>
-      </Link>
+     
     </div>
   );
 };

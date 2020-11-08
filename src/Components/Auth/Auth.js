@@ -35,7 +35,7 @@ function Auth(props) {
       .post("/api/login", { email, password })
       .then((res) => {
         console.log(res);
-        //props.getUser(res.data);
+        // props.getUser(res.data);
         console.log(props);
         const { email, cust_id, age, gender, height, weight}= res.data;
         props.loginUser(email, cust_id, age, gender, height, weight)
@@ -51,7 +51,7 @@ function Auth(props) {
       axios
         .post("/api/register", { email, password })
         .then((res) => {
-          //props.getUser(res.data);
+          // props.getUser(res.data);
           props.history.push("/new");
         })
         .catch((err) => console.log(err));

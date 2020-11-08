@@ -1,11 +1,13 @@
-drop table if exists cust;
+
 drop table if exists tdee;
 drop table if exists progress;
 drop table if exists measurements;
+drop table if exists macros;
+drop table if exists cust;
 create table if not exists cust (
     id serial primary key,
     email varchar(80),
-    password text,
+    password text
 );
 
 create table if not exists tdee (
@@ -13,21 +15,23 @@ create table if not exists tdee (
     weight decimal,
     height decimal,
     age decimal,
-    bmi decimal,
     tdee decimal,
-    cust_id int references cust(id),
     fname varchar(50),
     gender varchar(6),
     activity text,
+    cust_id int references cust(id)
 );
 
 create table if not exists measurements ( 
+    id serial primary key,
     ra decimal,
     la decimal,
     hw decimal,
     lw decimal,
     rl decimal,
     ll decimal,
+    weight decimal,
+    Date date,
     cust_id int references cust(id)
 );
 
@@ -35,10 +39,10 @@ create table if not exists progress (
     id serial primary key,
     pic text,
     weight decimal,
-    lbm decimal,
     Date date,
+    activity text,
     cust_id int references cust(id)
-    activity decimal
+    
 );
 create table if not exists macros (
     id serial primary key,
@@ -46,8 +50,10 @@ create table if not exists macros (
     fats decimal,
     carbs decimal,
     protein decimal,
-    cust_id int references cust(id)
+    cust_id int references cust(id),
+    post_id int references measurements(id)
     );
+
 
 -- alter table tdee
 -- add column fname varchar(50)
