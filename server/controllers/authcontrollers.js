@@ -7,7 +7,7 @@ module.exports = {
     const { email, password } = req.body;
 
     const [user] = await db.check_user([email]);
-
+    console.log(email, password, user);
     if (user) {
       return res.status(409).send("user already exists");
     }
@@ -16,7 +16,7 @@ module.exports = {
     const hash = bcrypt.hashSync(password, salt);
 
     const [newUser] = await db.register_user([email, hash]);
-
+    console.log(newUser);
     req.session.cust = newUser;
 
     res.status(200).send(req.session.cust);
@@ -26,6 +26,7 @@ module.exports = {
       db = req.app.get("db");
     //console.log (req.body)
     const [foundUser] = await db.check_user([email]);
+    console.log(foundUser);
     if (!foundUser) {
       return res.status(400).send("Email is not found");
     }
@@ -58,10 +59,10 @@ module.exports = {
   },
   createProfile: async (req, res) => {
     const db = req.app.get("db");
-    const { fname, age, gender, height, weight, activity, tdee} = req.body;
+    const { fname, age, gender, height} = req.body;
     const { id } = req.session.cust;
     console.log(req.body, id);
-    await db.create_profile(fname, age, gender, height, weight, activity, tdee, id);
+    await db.create_profile(fname, age, gender, height, id);
     res.sendStatus(200);
   },
   //   getUserPost: async (req, res) => {

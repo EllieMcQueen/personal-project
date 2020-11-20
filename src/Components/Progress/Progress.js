@@ -23,21 +23,21 @@ function Progress(props) {
   },[])
   
 
-  const getProgress = () => {
-    const { search } = state;
-    axios
-      .get(`/api/progress?search=${search}`)
-      .then((res) => sState({ ...state, progress: res.data }))
-      .catch((err) => console.log(err));
-  };
+  // const getProgress = () => {
+  //   const { search } = state;
+  //   axios
+  //     .get(`/api/progress?search=${search}`)
+  //     .then((res) => sState({ ...state, progress: res.data }))
+  //     .catch((err) => console.log(err));
+  // };
   
   
  
 
-  const handleChange = (e) => {
-      console.log(e.target.name, e.target.value)
-      sState({ ...state, [e.target.name]: e.target.value });  
-  }
+  // const handleChange = (e) => {
+  //     console.log(e.target.name, e.target.value)
+  //     sState({ ...state, [e.target.name]: e.target.value });  
+  // }
 
   
 
@@ -60,9 +60,10 @@ function Progress(props) {
           <button onClick={handleAge}>Update Age</button> */}
           {/* <button onClick={deleteAge}>Delete Age</button> */}
         </div>
-        {state.progress.map((post) => {
+        {state.progress.map((post, i) => {
           return (
-            <div>
+            <div key={i} >
+              {/* add measurements */}
               <span>Calories: {post.calories}</span>
               <span>Carbs: {post.carbs}</span>
               <span>fats: {post.fats}</span>

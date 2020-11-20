@@ -37,8 +37,8 @@ function Auth(props) {
         console.log(res);
         // props.getUser(res.data);
         console.log(props);
-        const { email, cust_id, age, gender, height, weight}= res.data;
-        props.loginUser(email, cust_id, age, gender, height, weight)
+        const { email, cust_id, age, gender, height}= res.data;
+        props.loginUser(email, cust_id, age, gender, height)
         props.history.push("/measure");
       })
       .catch((err) => console.log(err));
@@ -51,7 +51,7 @@ function Auth(props) {
       axios
         .post("/api/register", { email, password })
         .then((res) => {
-          // props.getUser(res.data);
+          props.getUser(res.data);
           props.history.push("/new");
         })
         .catch((err) => console.log(err));

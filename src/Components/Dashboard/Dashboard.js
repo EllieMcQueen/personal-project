@@ -14,20 +14,17 @@ function Dashboard(props) {
     fats: 0,
     protein: 0,
     carbs:0
-  }); 
-
-  useEffect(() => {
-    axios.get('/api/getInfo')
-    .then(res => sState({...state, tdee: res.data.tdee, weight: res.data.weight}))
-    .catch(err=> console.log(err))
-  }, [])
+  });
 
 const handleInput = (e) => {
   sState({...state, [e.target.name]: e.target.value});
 };
 
 const createMacros = () => {
-  const {weight, tdee, intake } = state
+  const { intake } = state
+  console.log(props.initialinfo)
+  const { weight, tdee }=props.initialinfo
+  // console.log(weight, tdee, intake);
   let calories
   let two
   let three 
@@ -96,10 +93,10 @@ return (
         </select>
         <button onClick={createMacros} className="form-submit-button">GET MACROS</button>
        
-        <span className='calories'>{state.calories}</span>
-        <span className='fats'>{state.fats}</span>
-        <span className='protein'>{state.protein}</span>
-        <span className='carbs'>{state.carbs}</span>
+        <span className='calories'>Calories: {state.calories}</span>
+        <span className='fats'>Fats: {state.fats}</span>
+        <span className='protein'>Protein: {state.protein}</span>
+        <span className='carbs'>Carbs: {state.carbs}</span>
      
        
       

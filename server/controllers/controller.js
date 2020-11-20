@@ -20,6 +20,7 @@ module.exports = {
     const db = req.app.get('db');
     const { id } = req.session.cust;
     const progress = await db.get_posts([id]);
+    console.log('progress', progress)
     return res.status(200).send(progress)
   },
 
@@ -54,11 +55,11 @@ module.exports = {
     console.log(info)
     res.status(200).send(info[0])
   },
-  getCustInfo: async(req, res) => {
+  CustInfo: async(req, res) => {
     const db = req.app.get('db');
-    const {cust_id} = req.session.cust;
-    console.log(cust_id)
-    const custInfo = await db.get_cust_info(cust_id)
+    const {id} = req.session.cust;
+    console.log(id)
+    const custInfo = await db.cust_info(id)
     console.log(custInfo)
     res.status(200).send(custInfo[0])
   },
@@ -75,9 +76,9 @@ module.exports = {
     const db = req.app.get('db')
     const {cust_id} = req.session.cust;
     const {measurementId} = req.session;
-    console.log(measurementId);
+    console.log('measurementID', measurementId);
     const { calories, fats, protein, carbs} = req.body;
-    const info = await db.update_macros( calories, fats, protein, carbs, cust_id, measurementId)
+    const info = await db.update_macros( calories, fats, protein, carbs, cust_id)
     console.log(info)
     res.status(200).send(info[0])
   }

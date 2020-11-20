@@ -29,7 +29,7 @@ const Measurements = (props) => {
   });
 
   useEffect(() => {
-    axios.get('/api/getCustInfo')
+    axios.get('/api/CustInfo')
     .then(res => sState({...state, height: res.data.height, age: res.data.age, gender: res.data.gender }))
     .catch(err => console.log(err))
   },[])
@@ -190,4 +190,5 @@ const Measurements = (props) => {
 };
 
 const mapStateToProps = (reduxState) => reduxState;
+
 export default connect(mapStateToProps, {setTdee})(Measurements);

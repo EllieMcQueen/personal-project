@@ -13,9 +13,8 @@ const initialState = {
   age: '',
   gender: '',
   height: '',
-  weight:'',
-  activity: '',
   tdee: 0,
+  weight: 0,
 };
 
 //action types
@@ -35,7 +34,7 @@ export function setTdee(tdee, weight, activity){
   };
 }
 
-export function loginUser(email, id, age, gender, height, weight) {
+export function loginUser(email, id, age, gender, height) {
   return {
     type: LOGIN_USER,
     payload: {
@@ -44,7 +43,6 @@ export function loginUser(email, id, age, gender, height, weight) {
       age: age, 
       gender: gender,
       height: height,
-      weight: weight,
     },
   };
 }
@@ -68,8 +66,8 @@ export default function (state = initialState, action) {
   console.log (action)
   switch (action.type) {
     case LOGIN_USER: {
-      const { email, id, age, gender, height, weight} = action.payload;
-      return { email, id, age, gender, height, weight};
+      const { email, id, age, gender, height} = action.payload;
+      return { email, id, age, gender, height};
     }
     case SET_TDEE:
       const { tdee, weight, activity } = action.payload;
