@@ -10,18 +10,20 @@ module.exports = {
       db.create_progress( pic, weight, lbm, date, id).then( () => res.sendStatus(200));
   },
 
-  // getMeasurements: async (req, res) => {
-  //   const db = req.app.get('db');
-  //   const [measurements] = await db.get_measurements();
-  //   return res.status(200).send([measurements])
-  //},
 
   getProgress: async (req, res) => {
     const db = req.app.get('db');
     const { id } = req.session.cust;
-    const progress = await db.get_posts([id]);
-    console.log('progress', progress)
+    const progress = await db.get_progress([id]);
+    console.log('PRrogress', progress)
     return res.status(200).send(progress)
+  },
+  singleProgress: async(req,res) => {
+    const db = req.app.get('db');
+    const {id} = req.params;
+    const measurements = await db.get_single_measurements(id);
+    console.log('single measurements', measurements)
+    res.status(200).send(measurements);
   },
 
   updateAge: async (req, res) => {
@@ -65,20 +67,18 @@ module.exports = {
   },
   updateMeasurements: async (req,res) => {
     const db = req.app.get('db');
-    const {cust_id} = req.session.cust;
+    const {id} = req.session.cust;
     const {rightArm, leftArm, highWaist, waist, rightleg, leftleg, weight, date} = req.body;
-    const info = await db.update_measurements(rightArm, leftArm, highWaist, waist, rightleg, leftleg, weight, date, cust_id)
+    const info = await db.update_measurements(rightArm, leftArm, highWaist, waist, rightleg, leftleg, weight, date, id)
     console.log(info[0].id)
     req.session.measurementId = info [0].id
     res.status(200).send(info[0])
   },
   updateMacros: async (req,res) => {
     const db = req.app.get('db')
-    const {cust_id} = req.session.cust;
-    const {measurementId} = req.session;
-    console.log('measurementID', measurementId);
+    const {id} = req.session.cust;
     const { calories, fats, protein, carbs} = req.body;
-    const info = await db.update_macros( calories, fats, protein, carbs, cust_id)
+    const info = await db.update_macros( calories, fats, protein, carbs, id)
     console.log(info)
     res.status(200).send(info[0])
   }

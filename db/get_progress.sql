@@ -1,6 +1,3 @@
-SELECT * FROM progress
-WHERE cust_id = $1;
-SELECT * FROM measurements 
-WHERE cust_id = $1;
-SELECT * FROM macros
-WHERE cust_id = $1;
+select * from measurements
+join macros on macros.id = measurements.id
+where measurements.cust_id = $1;

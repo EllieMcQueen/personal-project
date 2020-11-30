@@ -64,10 +64,11 @@ if (intake === 'cutting') {
   console.log(fats)
   console.log(protein)
   console.log(carbs)
-  sState({...state, calories: calories, fats: fats, protein: protein, carbs: carbs})
+  sState({ ...state, calories: calories.toFixed(2), fats: fats.toFixed(2), protein: protein.toFixed(2), carbs: carbs.toFixed(2)})
+  // sState({...state, calories: calories, fats: fats, protein: protein, carbs: carbs})
   
 
-  // sState({ ...state, calories: calories.toFixed(2), fats: fats.toFixed(2), protein: protein.toFixed(2), carbs: carbs.toFixed(2)});
+  // ;
   // console.log(calories.toFixed(2));
   // console.log(fats.toFixed(2));
   // console.log(protein.toFixed(2));

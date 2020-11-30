@@ -39,7 +39,8 @@ app.post("/api/login", auth.login);
 app.post("/api/post", ctrl.createProgress);
 app.post('/api/profile', auth.createProfile);
 ///Get endpoints
-app.get('/api/CustInfo', ctrl.CustInfo)
+app.get('/api/progress/single/:id', ctrl.singleProgress);
+app.get('/api/CustInfo', ctrl.CustInfo);
 app.get("/api/progress", ctrl.getProgress);
 app.get("/api/tdee", ctrl.getTdee);
 app.get('/api/getInfo', ctrl.getInfo)

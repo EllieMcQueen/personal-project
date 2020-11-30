@@ -8,10 +8,7 @@ import { getProgress } from "../../ducks/mreducer";
 function Progress(props) {
   const [state, sState] = useState({
     fname: "",
-    editProgress: "",
-    deleteProgress: "",
-    age: 0,
-    updateAge: false,
+    date:'',
     progress: [],
   });
 
@@ -19,92 +16,55 @@ function Progress(props) {
   useEffect(() => {
     axios.get('/api/progress')
     .then(res => sState({...state, progress: res.data}))
-    .catch(err => console.log(err))
+    .catch(err => console.log('get entry request failed'))
   },[])
   
 
-  // const getProgress = () => {
-  //   const { search } = state;
-  //   axios
-  //     .get(`/api/progress?search=${search}`)
-  //     .then((res) => sState({ ...state, progress: res.data }))
-  //     .catch((err) => console.log(err));
-  // };
-  
-  
- 
-
-  // const handleChange = (e) => {
-  //     console.log(e.target.name, e.target.value)
-  //     sState({ ...state, [e.target.name]: e.target.value });  
-  // }
-
-  
+let mappedProgress =  state.progress.map( (el,i) => {
+  let date = new Date(el.date)
+  return(
+    <Link className='progress-fl' to={`/progressDetails/${el.id}`} key={i} >
+            <div className='progress'>
+                    <div className='progress-title'>
+                        <span>Measurements {date.toDateString().split(' ').slice(1).join(' ')}</span>
+                        <span className='chevron-right'>&#8250;</span>
+                    </div>
+                    {/* //<img className="purchase-history-img" src={el.img_url} alt='product image'/> */}
+                </div>
+            </Link>)})
 
   return (
-    <div className="progress2">
-      <header className="dash-header">
-        <div className="dash-header-cont">
-          <span className='Progress'>{state.measurements}</span>
-        </div>
-
-        
-      </header>
-      <div className="dashboard-table">
-        <div className="table-header">
-          {/* <span className="progress-date">Date Created</span> */}
-        </div>
-        <div>
-          {/* <span>Age:</span>
-            {ageInput()}
-          <button onClick={handleAge}>Update Age</button> */}
-          {/* <button onClick={deleteAge}>Delete Age</button> */}
-        </div>
-        {state.progress.map((post, i) => {
-          return (
-            <div key={i} >
-              {/* add measurements */}
-              <span>Calories: {post.calories}</span>
-              <span>Carbs: {post.carbs}</span>
-              <span>fats: {post.fats}</span>
-              <span>protein: {post.protein}</span>
+     <div {...props}>
+           <header className="progress-history-header">
+           <p className="progress-history-exit"  onClick={() => {
+                    props.history.push("/home")
+                }}>Back</p>
+                <p className="progress-history-title">Progress History</p>
+                <button className="progress-history-faq">?</button>
+            </header>
+            {state.progress.length === 0?
+            <h1 className='no-progress'>You have no progress yet</h1>
+            
+            :
+            <div className='order-flex'>
+                {mappedProgress}
             </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+            }
+            
+        </div>
+        
+    )
+    
 }
+    
+          // return (
+          //   <div key={i} >
+          //     {/* add measurements */}
+          //     <span>Calories: {post.calories}</span>
+          //     <span>Carbs: {post.carbs}</span>
+          //     <span>fats: {post.fats}</span>
+          //     <span>protein: {post.protein}</span>
+        
 
 const mapStateToProps = (reduxState) => reduxState;
-export default connect(mapStateToProps)(Progress);
-
-
-// const handleAge = () => {
-  //   if(state.updateAge) {
-  //     axios
-  //     .put(`/api/progress`)
-  //     .then((res) => { 
-  //     sState({ ...state, age: res.data, updateAge: false})
-  //     })
-  //     .catch((err) => console.log(err));
-  //   } else {
-  //     sState({ ...state, updateAge: true})
-  //   }
-  // }
-
-  // const deleteAge = () => {
-  //     axios
-  //     .delete(`/api/progress`)
-  //     .then((res) => { 
-  //     sState({ ...state, age: 0})
-  //     })
-  //     .catch((err) => console.log(err));
-   // }
-   // const ageInput = () => {
-  //   if(state.updateAge) {
-  //     return <input name="age" value={state.age} onChange={handleChange} ></input>
-  //   } else {
-  //     return <input name="age" value={state.age} onChange={handleChange} disabled></input>
-  //   }
-  // }
+export default connect(mapStateToProps, {})(Progress);
