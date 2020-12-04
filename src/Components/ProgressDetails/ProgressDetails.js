@@ -1,7 +1,7 @@
 import React, {useState, useEffect, lazy} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
-
+import "../../scss/ProgressDetails.scss";
 
 
 function ProgressDetails(props) {
@@ -63,18 +63,23 @@ function ProgressDetails(props) {
                             Progress Summary
                         </span>
                         <div className='progress-summary-details'>
-                            <div className='progress-summary-subtotal'>
+                            <div className='progress-summary-2'>
                             
           
                                 <span>Calories: {state.calories}</span>
-                                <span>fats: {state.fats}</span>
+                                <span>Protein: {state.protein}</span>
                                 <span>Carbs: {state.carbs}</span>
-                                <span>protein: {state.protein}</span>
-                                
-                            </div>
+                                <span>Fats: {state.fats}</span>
+                                </div>   
+                                </div>
+                                </section>          
+                           
                             <div className='measurements-summary'>
-                                <span>Measurements</span>
-                                <span>Right Arm: {state.ra}</span>
+                                <span className='measurements-summary-title'>
+                                    Measurements  
+                                </span>
+                                <div className='measurements-summary-2'>
+                                <span> Right Arm: {state.ra}</span>
                                  <span>Left Arm: {state.la}</span>       
                                  <span>High Waist: {state.hw}</span>         
                                  <span>Waist: {state.lw}</span>    
@@ -83,8 +88,8 @@ function ProgressDetails(props) {
                                  <span>Weight: {state.weight}</span>     
                             </div>
                             </div>
-                        
-                    </section>
+                           
+                   
                    
 
                     
