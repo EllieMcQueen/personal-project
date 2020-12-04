@@ -6,6 +6,7 @@ import "../../scss/Auth.scss";
 import { Link } from "react-router-dom";
 import backLogo from "./logo.jpg";
 
+//this is stupid
 //METHODS
 //HANDLE CHANGE (2)
 //LOGIN
